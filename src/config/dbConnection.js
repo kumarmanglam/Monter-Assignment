@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://0.0.0.0:27017/assignment");
+mongoose.connect(
+  "mongodb+srv://kumarmanglamemail:IPIvZpsYD1jMAYqC@cluster0.i53lktc.mongodb.net/assignment"
+);
 
 module.exports = mongoose;
