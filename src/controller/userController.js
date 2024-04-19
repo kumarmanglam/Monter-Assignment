@@ -8,7 +8,19 @@ const { sendOTP } = require("../utils/email");
 const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const userExists = await userModel.findOne({ email });
+
+    const userExistAsPending = await userModel.findOne({
+      email,
+      status: "pending",
+    });
+
+    if (userExistAsPending) {
+      await userModel.deleteOne({ email, status: "pending" });
+    }
+    const userExists = await userModel.findOne({
+      email,
+      status: "verified",
+    });
     if (userExists) {
       return res.status(400).json({ error: "User already exists" });
     }
