@@ -11,4 +11,5 @@ const res = require("dotenv").config();
 app.use("/", authRouter);
 app.get("/user", protect, getUserInfo);
 
+app.get("/", (req, res) => res.send("Assignment Api base url working..."));
 app.listen(process.env.PORT, () => console.log("Server running..."));
