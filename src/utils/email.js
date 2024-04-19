@@ -19,11 +19,12 @@ const sendOTP = async (email, OTP) => {
 
     // console.log(email, OTP);
     await transporter.sendMail({
-      from: `"monterAssignment" <${process.env.EMAIL_USER}>`,
+      from: `"monterAssignment" <kumarbackups01@gmail.com>`,
       to: [email],
       subject: "OTP Verification",
       text: `Your OTP for email verification is: ${OTP}`,
     });
+    console.log(`OTP sent to ${email}`);
   } catch (error) {
     console.error("Error sending email:", error);
   }
