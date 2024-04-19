@@ -33,7 +33,9 @@ const register = async (req, res) => {
 const verifyAccount = async (req, res) => {
   try {
     const { email, OTP } = req.body;
+    console.log(email, OTP);
     const user = await userModel.findOne({ email, OTP, status: "pending" });
+    console.log(user);
     if (!user) {
       return res.status(400).json({ error: "Invalid OTP or Email" });
     }
@@ -68,7 +70,7 @@ const addUserInfo = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await userModel.findOne({ email, status: "verfied" });
+    const user = await userModel.findOne({ email, status: "verified" });
     if (!user) {
       return res.status(404).json({ error: "User not found or not verfied" });
     }
@@ -87,4 +89,12 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, verifyAccount, addUserInfo, login };
+const getUserInfo = async (req, res) => {
+  const userId = req.user.id;
+  const userExists = await userModel.findById(userId);
+  const { name, email, age, location, workDetails } = userExists;
+  const user = { name, email, age, location, workDetails };
+  res.status(200).json(user);
+};
+
+module.exports = { register, verifyAccount, addUserInfo, login, getUserInfo };

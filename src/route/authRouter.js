@@ -1,6 +1,6 @@
 const express = require("express");
 
-const router = expresss.Router();
+const router = express.Router();
 
 const {
   register,
@@ -9,7 +9,9 @@ const {
   addUserInfo,
 } = require("../controller/userController");
 
-app.post("/register", register);
-app.post("/verfiy", verifyAccount);
-app.post("/addUserInfo", addUserInfo);
-app.post("/login", login);
+router.post("/register", register);
+router.post("/verify", verifyAccount);
+router.post("/addUserInfo", addUserInfo);
+router.post("/login", login);
+
+module.exports = router;
